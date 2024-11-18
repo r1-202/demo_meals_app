@@ -1,3 +1,4 @@
+import 'package:demo_meals_app/screens/details_screen.dart';
 import 'package:flutter/material.dart';
 import '../models/meal.dart';
 import '../services/database_services.dart';
@@ -8,7 +9,7 @@ class PopupMenuWidget extends StatelessWidget {
 
   void editMeal(BuildContext context) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => Placeholder()));
+        context, MaterialPageRoute(builder: (context) => DetailsScreen(meal, true, "Edit Meal")));
   }
 
   void removeMeal() async {

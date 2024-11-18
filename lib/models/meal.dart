@@ -53,6 +53,102 @@ class Meal {
   String? strCreativeCommonsConfirmed;
   String? dateModified;
 
+  List<String?> getIngredients() {
+    return [
+      strIngredient1,
+      strIngredient2,
+      strIngredient3,
+      strIngredient4,
+      strIngredient5,
+      strIngredient6,
+      strIngredient7,
+      strIngredient8,
+      strIngredient9,
+      strIngredient10,
+      strIngredient11,
+      strIngredient12,
+      strIngredient13,
+      strIngredient14,
+      strIngredient15,
+      strIngredient16,
+      strIngredient17,
+      strIngredient18,
+      strIngredient19,
+      strIngredient20,
+    ];
+  }
+
+  void setIngredients(List<String?> list) {
+    strIngredient1 = list[0];
+    strIngredient2 = list[1];
+    strIngredient3 = list[2];
+    strIngredient4 = list[3];
+    strIngredient5 = list[4];
+    strIngredient6 = list[5];
+    strIngredient7 = list[6];
+    strIngredient8 = list[7];
+    strIngredient9 = list[8];
+    strIngredient10 = list[9];
+    strIngredient11 = list[10];
+    strIngredient12 = list[11];
+    strIngredient13 = list[12];
+    strIngredient14 = list[13];
+    strIngredient15 = list[14];
+    strIngredient16 = list[15];
+    strIngredient17 = list[16];
+    strIngredient18 = list[17];
+    strIngredient19 = list[18];
+    strIngredient20 = list[19];
+  }
+
+  List<String?> getMeasurements() {
+    return [
+      strMeasure1,
+      strMeasure2,
+      strMeasure3,
+      strMeasure4,
+      strMeasure5,
+      strMeasure6,
+      strMeasure7,
+      strMeasure8,
+      strMeasure9,
+      strMeasure10,
+      strMeasure11,
+      strMeasure12,
+      strMeasure13,
+      strMeasure14,
+      strMeasure15,
+      strMeasure16,
+      strMeasure17,
+      strMeasure18,
+      strMeasure19,
+      strMeasure20,
+    ];
+  }
+
+    void setMeasurements(List<String?> list) {
+    strMeasure1 = list[0];
+    strMeasure2 = list[1];
+    strMeasure3 = list[2];
+    strMeasure4 = list[3];
+    strMeasure5 = list[4];
+    strMeasure6 = list[5];
+    strMeasure7 = list[6];
+    strMeasure8 = list[7];
+    strMeasure9 = list[8];
+    strMeasure10 = list[9];
+    strMeasure11 = list[10];
+    strMeasure12 = list[11];
+    strMeasure13 = list[12];
+    strMeasure14 = list[13];
+    strMeasure15 = list[14];
+    strMeasure16 = list[15];
+    strMeasure17 = list[16];
+    strMeasure18 = list[17];
+    strMeasure19 = list[18];
+    strMeasure20 = list[19];
+  }
+
   Meal(
       {this.idMeal,
       this.strMeal,

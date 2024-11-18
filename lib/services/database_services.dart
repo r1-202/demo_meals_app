@@ -143,4 +143,20 @@ class DatabaseServices {
     final db = await database;
     await db.delete('meals');
   }
+
+  Future<int> getNextId() async {
+    final db = await database;
+    var result =
+        await db.rawQuery('SELECT MAX(CAST(idMeal AS INTEGER)) FROM meals');
+
+    // If the result is null, set the next id to 1
+    int nextId = 1;
+    if (result.isNotEmpty &&
+        result[0]['MAX(CAST(idMeal AS INTEGER))'] != null) {
+      nextId =
+          int.tryParse(result[0]['MAX(CAST(idMeal AS INTEGER))'].toString())! +
+              1;
+    }
+    return nextId;
+  }
 }

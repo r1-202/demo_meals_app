@@ -1,3 +1,4 @@
+import 'package:demo_meals_app/screens/details_screen.dart';
 import 'package:demo_meals_app/widgets/image_widget.dart';
 import 'package:demo_meals_app/widgets/popup_menu_widget.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class MealWidget extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Placeholder(),
+            builder: (context) => DetailsScreen(meal, false, "Meal Details"),
           ),
         );
       },
@@ -44,7 +45,7 @@ class MealWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      meal.strIngredient1!,
+                      '${meal.strIngredient1??""},${meal.strIngredient2??""},${meal.strIngredient3??""}',
                       style: TextStyle(
                         color: Colors.grey[600],
                         fontSize: 14,
