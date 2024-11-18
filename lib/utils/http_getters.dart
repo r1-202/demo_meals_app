@@ -32,6 +32,6 @@ Future<void> saveMeals() async {
   var list = await getAllMealsHTTP();
   final db = DatabaseServices();
   for (var meal in list) {
-    db.insertMeal(meal);
+    await db.insertMeal(meal);
   }
 }
