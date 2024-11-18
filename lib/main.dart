@@ -1,6 +1,22 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-void main() {
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'utils/http_getters.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+
+void main() async {
+  if (Platform.isWindows || Platform.isLinux) {
+    // Initialize FFI
+    sqfliteFfiInit();
+  }
+  databaseFactory = databaseFactoryFfi;
+  final prefs = await SharedPreferences.getInstance();
+  final saved = prefs.getBool('saved') ?? false;
+  if (!saved) {
+    await saveMeals();
+    await prefs.setBool('saved', true);
+  }
   runApp(const MyApp());
 }
 

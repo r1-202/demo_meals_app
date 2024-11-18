@@ -13,13 +13,14 @@ Future<List<Meal>> getAllMealsHTTP() async {
       .runes
       .map((int rune) => String.fromCharCode(rune));
   for (var c in alphabet) {
-    http.Response response = await http
-        .get(Uri.parse("www.themealdb.com/api/json/v1/1/search.php?f=$c"));
+    http.Response response = await http.get(
+        Uri.parse("https://www.themealdb.com/api/json/v1/1/search.php?f=$c"));
     if (response.statusCode != 200) {
       continue;
     }
     Map<String, dynamic> jsonMap =
         jsonDecode(response.body) as Map<String, dynamic>;
+    if (jsonMap["meals"] == null) continue;
     var listJson = jsonMap["meals"] as List<dynamic>;
     for (var l in listJson) {
       list.add(Meal.fromJson(l));
