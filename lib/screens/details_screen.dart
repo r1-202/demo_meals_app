@@ -139,8 +139,21 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                       ElevatedButton(
                           onPressed: () {
-                            save();
-                            Navigator.pop(context);
+                            if (meal.strMeal == null || meal.strMeal == "") {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Please input a meal name!'),
+                                  duration: Duration(
+                                      seconds:
+                                          3),
+                                  backgroundColor: Colors
+                                      .red,
+                                ),
+                              );
+                            } else {
+                              save();
+                              Navigator.pop(context);
+                            }
                           },
                           child: Text('Save')),
                       SizedBox(width: 20),
@@ -163,6 +176,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
       meal.idMeal = id.toString();
     }
     await db.insertMeal(meal);
-    widget.onUpdate;
+    widget.onUpdate();
   }
 }
