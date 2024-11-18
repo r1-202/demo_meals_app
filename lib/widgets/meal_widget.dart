@@ -1,4 +1,5 @@
 import 'package:demo_meals_app/widgets/image_widget.dart';
+import 'package:demo_meals_app/widgets/popup_menu_widget.dart';
 import 'package:flutter/material.dart';
 import '../models/meal.dart';
 
@@ -52,6 +53,7 @@ class MealWidget extends StatelessWidget {
                   ],
                 ),
               ),
+              PopupMenuWidget(meal)
             ],
           ),
         ),
