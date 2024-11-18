@@ -102,6 +102,12 @@ class DatabaseServices {
     });
   }
 
+  Future<List<Meal>> getMealsSorted() async{
+    var list = await getMeals();
+    list.sort((a,b)=>a.strMeal!.compareTo(b.strMeal!));
+    return list;
+  }
+
   // Get a meal by its ID
   Future<Meal?> getMealById(String idMeal) async {
     final db = await database;

@@ -16,13 +16,13 @@ class _MealsScreenState extends State<MealsScreen> {
   void initState() {
     final db = DatabaseServices();
     super.initState();
-    futureMeals = db.getMeals();
+    futureMeals = db.getMealsSorted();
   }
 
   void _refreshData() {
     final db = DatabaseServices();
     setState(() {
-      futureMeals = db.getMeals();
+      futureMeals = db.getMealsSorted();
     });
     print('refreshed\n');
   }
