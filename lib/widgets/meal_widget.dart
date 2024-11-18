@@ -6,8 +6,9 @@ import '../models/meal.dart';
 
 class MealWidget extends StatelessWidget {
   final Meal meal;
+  final Function onUpdate;
 
-  MealWidget(this.meal);
+  MealWidget(this.meal, this.onUpdate);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class MealWidget extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailsScreen(meal, false, "Meal Details"),
+            builder: (context) => DetailsScreen(meal, false, "Meal Details", onUpdate),
           ),
         );
       },
@@ -54,7 +55,7 @@ class MealWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              PopupMenuWidget(meal)
+              PopupMenuWidget(meal, onUpdate)
             ],
           ),
         ),

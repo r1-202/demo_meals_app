@@ -19,6 +19,14 @@ class _MealsScreenState extends State<MealsScreen> {
     futureMeals = db.getMeals();
   }
 
+  void _refreshData() {
+    final db = DatabaseServices();
+    setState(() {
+      futureMeals = db.getMeals();
+    });
+    print('refreshed\n');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +44,7 @@ class _MealsScreenState extends State<MealsScreen> {
                       itemCount: meals.length,
                       itemBuilder: (context, index) {
                         final meal = meals[index];
-                        return MealWidget(meal);
+                        return MealWidget(meal, _refreshData);
                       });
                 } else if (snapshot.hasError) {
                   return Text('${snapshot.error}');
@@ -50,11 +58,12 @@ class _MealsScreenState extends State<MealsScreen> {
             bottom: 20,
             right: 20,
             child: FloatingActionButton(
-              onPressed: () async {
-                await Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => DetailsScreen(Meal(),true,"Create Meal")));
-                final db = DatabaseServices();
-                futureMeals = db.getMeals();
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            DetailsScreen(Meal(), true, "Create Meal", _refreshData)));
               },
               child: Icon(Icons.add),
             ),

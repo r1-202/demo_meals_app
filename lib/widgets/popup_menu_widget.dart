@@ -5,16 +5,18 @@ import '../services/database_services.dart';
 
 class PopupMenuWidget extends StatelessWidget {
   final Meal meal;
-  PopupMenuWidget(this.meal);
+  final Function onUpdate;
+  PopupMenuWidget(this.meal, this.onUpdate);
 
   void editMeal(BuildContext context) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => DetailsScreen(meal, true, "Edit Meal")));
+        context, MaterialPageRoute(builder: (context) => DetailsScreen(meal, true, "Edit Meal", onUpdate)));
   }
 
   void removeMeal() async {
     final db = DatabaseServices();
     await db.deleteMeal(meal.idMeal!);
+    onUpdate();
   }
 
   void favoriteMeal() {}

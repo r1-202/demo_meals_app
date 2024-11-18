@@ -7,7 +7,8 @@ class DetailsScreen extends StatefulWidget {
   final Meal meal;
   final bool edit;
   final String title;
-  DetailsScreen(this.meal, this.edit, this.title);
+  final Function onUpdate;
+  DetailsScreen(this.meal, this.edit, this.title, this.onUpdate);
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
 }
@@ -29,12 +30,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
     ingredientsList = meal.getIngredients();
     _controller1 = TextEditingController(text: meal.strMeal);
     _controller2 = TextEditingController(text: meal.strInstructions);
-    _ingredientControllerList = List<TextEditingController>.empty(growable: true);
+    _ingredientControllerList =
+        List<TextEditingController>.empty(growable: true);
     for (int i = 0; i < ingredientsList.length; ++i) {
       _ingredientControllerList
           .add(TextEditingController(text: ingredientsList[i]));
     }
-    _measurementControllerList = List<TextEditingController>.empty(growable: true);
+    _measurementControllerList =
+        List<TextEditingController>.empty(growable: true);
     for (int i = 0; i < measurementList.length; ++i) {
       _measurementControllerList
           .add(TextEditingController(text: measurementList[i]));
@@ -137,7 +140,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       ElevatedButton(
                           onPressed: () {
                             save();
-                            Navigator.pop(context, meal);
+                            Navigator.pop(context);
                           },
                           child: Text('Save')),
                       SizedBox(width: 20),
@@ -151,12 +154,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 ]))));
   }
 
-  void save() async {
+  Future<void> save() async {
     meal.setIngredients(ingredientsList);
     meal.setMeasurements(measurementList);
     final db = DatabaseServices();
-    int id = await db.getNextId();
-    meal.idMeal = id.toString();
+    if (meal.idMeal == null) {
+      int id = await db.getNextId();
+      meal.idMeal = id.toString();
+    }
     await db.insertMeal(meal);
+    widget.onUpdate;
   }
 }
