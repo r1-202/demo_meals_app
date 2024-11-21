@@ -7,14 +7,15 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'screens/meals_screen.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux) {
     // Initialize FFI
     sqfliteFfiInit();
+    databaseFactory = databaseFactoryFfi;
   }
-  databaseFactory = databaseFactoryFfi;
   final prefs = await SharedPreferences.getInstance();
   final saved = prefs.getBool('saved') ?? false;
-  if (!saved) {
+  if (saved) {
     await saveMeals();
     await prefs.setBool('saved', true);
   }
